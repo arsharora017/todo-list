@@ -13,10 +13,14 @@ type onAddProps = {
 export default function TodoForm({ onAdd }: onAddProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [required, setRequired] = useState(false);
   const id = uuidv4();
 
   function handleSubmit() {
-    if (!title.trim()) return;
+    if (!title.trim()) {
+      setRequired(true);
+      return;
+    }
 
     onAdd({
       id,
@@ -39,15 +43,23 @@ export default function TodoForm({ onAdd }: onAddProps) {
         <Input
           placeholder="Todo Title"
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => {
+            setTitle(e.target.value);
+            if (required) setRequired(false);
+          }}
           required
+          className={
+            required ? "border-destructive focus-visible:ring-destructive" : ""
+          }
         ></Input>
         <Textarea
           placeholder="Todo Description"
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></Textarea>
-        <Button onClick={handleSubmit}>Add Todo</Button>
+        <Button onClick={handleSubmit} className="cursor-pointer">
+          Add Todo
+        </Button>
       </CardContent>
     </Card>
   );

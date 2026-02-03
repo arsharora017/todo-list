@@ -19,6 +19,12 @@ export default function TodoContainer() {
     );
   };
 
+  const handleOnEdit = (updatedTodo: Todo) => {
+    setTodos((prev) =>
+      prev.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo)),
+    );
+  };
+
   const handleOnDelete = (id: string) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
@@ -30,6 +36,7 @@ export default function TodoContainer() {
         todos={todos}
         handleOnChecked={handleOnChecked}
         handleOnDelete={handleOnDelete}
+        handleOnEdit={handleOnEdit}
       />
     </div>
   );

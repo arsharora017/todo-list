@@ -5,12 +5,14 @@ type Props = {
   todos: Todo[];
   handleOnChecked: (id: string) => void;
   handleOnDelete: (id: string) => void;
+  handleOnEdit: (todo: Todo) => void;
 };
 
 export default function TodoList({
   todos,
   handleOnChecked,
   handleOnDelete,
+  handleOnEdit,
 }: Props) {
   if (todos.length <= 0) {
     return (
@@ -29,6 +31,7 @@ export default function TodoList({
           todo={todo}
           handleOnChecked={handleOnChecked}
           handleOnDelete={handleOnDelete}
+          handleOnEdit={handleOnEdit}
         />
       ))}
     </div>
