@@ -9,8 +9,8 @@ import { Textarea } from "../ui/textarea";
 
 type Props = {
   todo: Todo;
-  handleOnChecked: (id: string) => void;
-  handleOnDelete: (id: string) => void;
+  handleOnChecked: (id: number | string, checked: boolean) => void;
+  handleOnDelete: (id: number | string) => void;
   handleOnEdit: (todo: Todo) => void;
 };
 
@@ -46,21 +46,21 @@ export default function TodoItem({
   };
 
   return (
-    <Card className={todo.checked ? "opacity-70" : ""}>
+    <Card className={todo.completed ? "opacity-70" : ""}>
       <CardContent className="flex gap-3 items-start">
         {/* View mode */}
         {!isEditing && (
           <>
             <div className="flex pt-1">
               <Checkbox
-                checked={todo.checked}
-                onCheckedChange={() => handleOnChecked(todo.id)}
+                checked={todo.completed}
+                onCheckedChange={() => handleOnChecked(todo.id, todo.completed)}
               ></Checkbox>
             </div>
 
             <div className="flex-1 space-y-1">
               <p
-                className={`font-medium wrap-break-word ${todo.checked ? "line-through text-muted-foreground" : ""}`}
+                className={`font-medium wrap-break-word ${todo.completed ? "line-through text-muted-foreground" : ""}`}
               >
                 {todo.title}
               </p>

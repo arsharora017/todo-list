@@ -3,8 +3,8 @@ import TodoItem from "./TodoItem";
 
 type Props = {
   todos: Todo[];
-  handleOnChecked: (id: string) => void;
-  handleOnDelete: (id: string) => void;
+  handleOnChecked: (id: number | string, checked: boolean) => void;
+  handleOnDelete: (id: number | string) => void;
   handleOnEdit: (todo: Todo) => void;
 };
 
