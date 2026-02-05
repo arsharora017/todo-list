@@ -3,18 +3,16 @@ import { Button } from "../ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "../ui/card";
 import { Input } from "../ui/input";
 import { Textarea } from "../ui/textarea";
-import type { Todo } from "@/types/todo";
-import { v4 as uuidv4 } from "uuid";
 
 type onAddProps = {
-  onAdd: (todo: Todo) => void;
+  onAdd: (data: { title: string; description?: string }) => void;
+  isSubmitting?: boolean;
 };
 
-export default function TodoForm({ onAdd }: onAddProps) {
+export default function TodoForm({ onAdd, isSubmitting }: onAddProps) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [required, setRequired] = useState(false);
-  const id = uuidv4();
 
   function handleSubmit() {
     if (!title.trim()) {
@@ -23,10 +21,8 @@ export default function TodoForm({ onAdd }: onAddProps) {
     }
 
     onAdd({
-      id,
       title,
       description,
-      checked: false,
     });
 
     // Reset form fields
@@ -57,8 +53,12 @@ export default function TodoForm({ onAdd }: onAddProps) {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         ></Textarea>
-        <Button onClick={handleSubmit} className="cursor-pointer">
-          Add Todo
+        <Button
+          onClick={handleSubmit}
+          disabled={isSubmitting}
+          className="cursor-pointer"
+        >
+          {isSubmitting ? "Adding..." : "Add Todo"}
         </Button>
       </CardContent>
     </Card>
