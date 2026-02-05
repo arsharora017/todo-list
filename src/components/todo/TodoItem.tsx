@@ -55,6 +55,7 @@ export default function TodoItem({
               <Checkbox
                 checked={todo.completed}
                 onCheckedChange={() => handleOnChecked(todo.id, todo.completed)}
+                className="cursor-pointer"
               ></Checkbox>
             </div>
 
@@ -72,6 +73,7 @@ export default function TodoItem({
             </div>
             <div className="flex gap-1">
               <Button
+                className="cursor-pointer transition-all duration-200 hover:bg-chart-3/20 hover:shadow-md"
                 variant="secondary"
                 size="sm"
                 onClick={() => setIsEditing(true)}
@@ -79,6 +81,7 @@ export default function TodoItem({
                 <Pencil />
               </Button>
               <Button
+                className="cursor-pointer transition-all duration-200 hover:bg-destructive/20 hover:shadow-md"
                 variant="secondary"
                 size="sm"
                 onClick={() => handleOnDelete(todo.id)}
@@ -112,7 +115,7 @@ export default function TodoItem({
             ></Textarea>
             <div className="flex justify-end gap-2">
               <Button
-                className="cursor-pointer hover:bg-destructive hover:text-muted"
+                className="cursor-pointer transition-all duration-200 hover:bg-destructive hover:text-muted hover:shadow-md"
                 variant="secondary"
                 size="sm"
                 onClick={cancelHandler}
@@ -120,7 +123,7 @@ export default function TodoItem({
                 Cancel
               </Button>
               <Button
-                className="cursor-pointer hover:bg-chart-2 hover:text-muted"
+                className="cursor-pointer transition-all duration-200 hover:bg-green-600 hover:text-white hover:shadow-md"
                 variant="secondary"
                 size="sm"
                 onClick={saveHandler}
